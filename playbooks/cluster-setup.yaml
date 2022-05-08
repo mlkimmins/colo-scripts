@@ -331,6 +331,22 @@
       api_version: rbac.authorization.k8s.io/v1
       kind: RoleBinding
       state: present
+  - name: Create a role binding dask for mika
+    community.kubernetes.k8s:
+      name: jhub-mkimmins-rb-dask
+      namespace: mika_dask
+      definition:
+        roleRef:
+          apiGroup: rbac.authorization.k8s.io
+          kind: ClusterRole
+          name: edit
+        subjects:
+        - kind: ServiceAccount
+          name: mkimmins
+          namespace: jhub
+      api_version: rbac.authorization.k8s.io/v1
+      kind: RoleBinding
+      state: present      
 #Generic
   - name: Create a SA for Spark
     community.kubernetes.k8s:
